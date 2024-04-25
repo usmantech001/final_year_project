@@ -1,8 +1,11 @@
 import 'package:final_year/dep/init.dart';
+import 'package:final_year/features/controllers/workflow.dart';
 import 'package:final_year/features/route/route.dart';
+import 'package:final_year/utils/constants/url.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -16,6 +19,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    bool loggedIn =  WorkflowController.instance.isLoggedIn();
     return ScreenUtilInit(
       
       designSize:const Size(360, 690),
@@ -30,7 +34,7 @@ class MyApp extends StatelessWidget {
             colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
             useMaterial3: true,
           ),
-          initialRoute: AppRoute.initial,
+          initialRoute: loggedIn?AppRoute.nationalProfile: AppRoute.initial,
           getPages: AppRoute.pages,
         );
       }

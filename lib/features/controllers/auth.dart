@@ -23,6 +23,7 @@ class AuthController extends GetxController{
     ResponseModel responseModel;
    Response response= await authRepo.registration(body);
    if(response.statusCode==200){
+    response.body['token'];
     responseModel = ResponseModel(isSuccess: true, message: 'Registration Successfull');
     isLoading=false;
     update();
@@ -44,11 +45,14 @@ class AuthController extends GetxController{
     ResponseModel responseModel;
    Response response= await authRepo.login(loginBody);
    if(response.statusCode==200){
-    //save user token
-    //authRepo.saveUserToken(response.body['token']);
+  
     String accessToken = response.body['token'];
    Response verifyTokenResponse= await authRepo.verifyToken(accessToken);
+
    if(verifyTokenResponse.statusCode==200){
+      //save user token
+    
+    authRepo.saveUserToken(response.body['token']);
          responseModel = ResponseModel(isSuccess: true, message: 'Login Success');
           isLoading=false;
     update();
@@ -71,6 +75,8 @@ class AuthController extends GetxController{
   
    }
   }
+
+ 
 
   checkIfSiunUpTextControllerIsNotEmpty(){
    if(firstNameController.text.isNotEmpty && lastNameController.text.isNotEmpty && emailController.text.isNotEmpty && passwordController.text.isNotEmpty){

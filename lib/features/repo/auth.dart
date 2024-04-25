@@ -19,10 +19,10 @@ class AuthRepo extends GetxService{
   Future<Response> verifyToken(String accessToken) async{
   return await apiClient.postData(UrlConstants.VERIFY_TOKEN_ENDPOINT, {'accessToken': accessToken});
   }
-  saveUserToken(token) async {
+  saveUserToken(String token) async {
     apiClient.token=token;
     apiClient.updateToken(token);
-    await sharedPreferences.setString(UrlConstants.TOKEN, token);
+    await sharedPreferences.setString(StorageConstants.TOKEN, token);
     
   }
   logOut(){

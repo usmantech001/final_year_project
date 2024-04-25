@@ -1,6 +1,5 @@
 import 'package:dotted_border/dotted_border.dart';
 import 'package:final_year/features/route/route.dart';
-import 'package:final_year/features/screens/application_created.dart';
 import 'package:final_year/utils/constants/colors.dart';
 import 'package:final_year/utils/widgets/button.dart';
 import 'package:final_year/utils/widgets/text.dart';
@@ -8,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 
-Widget uploadDocContainer({required String mainText}) {
+Widget uploadDocContainer({required String mainText, required VoidCallback onTap}) {
   return Padding(
     padding: EdgeInsets.only(top: 10.h),
     child: Column(
@@ -38,7 +37,7 @@ Widget uploadDocContainer({required String mainText}) {
                     fontWeight: FontWeight.w500,
                     fontSize: 15.sp,
                     textColor: AppColors.lightBlackColor),
-                browseFileButton()
+                browseFileButton(onTap: onTap)
               ],
             ),
           ),
@@ -48,9 +47,9 @@ Widget uploadDocContainer({required String mainText}) {
   );
 }
 
-Widget nationalDocContainer({required String text, required BuildContext context}) {
+Widget nationalDocContainer({required String text,  VoidCallback? onTap}) {
   return GestureDetector(
-    onTap: () => Get.toNamed(AppRoute.applicationCreated),
+    onTap: onTap,
     child: Container(
       margin: EdgeInsets.only(top: 10.h),
       padding: EdgeInsets.only(left: 15.w, bottom: 15.h),

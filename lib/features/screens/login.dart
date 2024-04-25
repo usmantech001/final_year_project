@@ -46,7 +46,7 @@ class LoginScreen extends StatelessWidget {
                            LoginModel loginBody = LoginModel(email: authcontroller.emailController.text, password: authcontroller.passwordController.text);
                          await authcontroller.loginUser(loginBody).then((ResponseModel response){
                           if(response.isSuccess==true){
-                            Get.offAllNamed(AppRoute.createNationalProfile);
+                            Get.offAllNamed(AppRoute.nationalProfile);
                            
                             successSnackbar(title: 'Success', message: response.message);
 
